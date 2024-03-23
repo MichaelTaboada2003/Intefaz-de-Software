@@ -20,7 +20,12 @@
 
 * Descargar node.js https://nodejs.org/en/download
 
-# Iniciar el servidor
+# Descargar npm e iniciar el servidor
+
+
+ ```cmd
+  npm install
+```
 
  ```cmd
   npm run dev
