@@ -8,7 +8,7 @@
  ```bash
   cd my-project
 ```
-
+* Usar el comando: 
  ```bash
   git clone (Aquí va el enlace HTTPS antes copiado)
 ```
