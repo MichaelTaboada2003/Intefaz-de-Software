@@ -1,17 +1,3 @@
-# Clonar repositorio
-* Instalar git https://www.youtube.com/watch?v=hVMgMHX-W7U
-* Ir al proyecto a clonar https://github.com/MichaelTaboada2003/Intefaz-de-Software
-* Dar click en Code, y copiar el enlace HTTPS ![image](https://github.com/MichaelTaboada2003/Intefaz-de-Software/assets/128438040/ef5702d6-f008-4dc2-823c-f9de5f175ef6)
-* Ir a la terminal y escoger la ruta en la cual se quiere poner el proyecto
-* Para moverse entre carpetas:
-  
- ```bash
-  cd my-project
-```
-* Usar el comando: 
- ```bash
-  git clone (Aquí va el enlace HTTPS antes copiado)
-```
 
 # Dependencias
 
