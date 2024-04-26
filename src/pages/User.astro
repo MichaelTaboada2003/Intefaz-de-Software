@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Movement from "../components/Movement.astro";
+---
+
+<Layout title="User">
+    <main class="w-100 mt-0 mb-0 flex-grow-1 ">
+        <div class="d-flex">
+            <div class="w-50 ">
+                <h1 class="mb-4 fw-bold" style="font-size:9vw;">¡Hola!, Jesus</h1>
+                <div>
+                    <h3 style="font-size:2.5vw;">Tu saldo actual es:</h3>
+                    <div class="d-flex">
+                        <div class="d-flex p-2 rounded fw-bold"
+                            style="background-color: rgba(156, 140, 140, 0.444); font-size: 4vw;">
+                            <div class="mx-2 px-2 rounded" style="background-color: rgb(156, 140, 140)">
+                                0.00
+                            </div>
+                            <div class="">| COP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 d-flex justify-content-center ">
+                    <button type="button" class="btn border"><span class="fw-bold">Recargar Saldo</span></button>
+                </div>
+            </div>
+            <div class="flex-fill pe-5">
+                <span class="fw-bold" style="font-size: 4vw;">Ultimos Movimientos</span>
+                <div class="mt-4" style="overflow-y: auto; max-height: 50vh;">
+                    <Movement type="Recarga" amount="20.000" date="23/01/2024 : 08:50 AM"></Movement>
+                    <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
+                    <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
+                    <Movement type="Recarga" amount="6.000" date="23/01/2024 : 08:50 AM"></Movement>
+                    <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
+                    <Movement type="Recarga" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
+                    <Movement type="Recarga" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</Layout>

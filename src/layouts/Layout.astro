@@ -22,113 +22,145 @@ const { title } = Astro.props;
     />
     <title>{title}</title>
   </head>
-  <header style="background-color: #EE860B;">
-    <nav
-      class="navbar bg-body-tertiary"
-      style="background-image: url(http://transcaribe.gov.co/wp-content/uploads/2021/11/header-scaled.jpg); background-size: cover"
-    >
-      <div class="container-fluid ps-5">
-        <div class="mw-10 mh-10">
-          <a href="http://transcaribe.gov.co/" data-wahfont="16">
-            <img
-              src="https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24-1024x712.png"
-              class="img-fluid"
-              alt=""
-              style="max-width: 80px;"
-              srcset="https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24-1024x712.png 1024w, https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24-300x209.png 300w, https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24-768x534.png 768w, https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24.png 1247w"
-            />
-          </a>
-        </div>
+  <body class="d-flex flex-column">
+    <header style="background-color: #EE860B;">
+      <nav
+        class="navbar bg-body-tertiary"
+        style="background-image: url(http://transcaribe.gov.co/wp-content/uploads/2021/11/header-scaled.jpg); background-size: cover"
+      >
+        <div class="container-fluid ps-5">
+          <div class="mw-10 mh-10">
+            <a href="http://transcaribe.gov.co/" data-wahfont="16">
+              <img
+                src="https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24-1024x712.png"
+                class="img-fluid"
+                alt=""
+                style="max-width: 80px;"
+                srcset="https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24-1024x712.png 1024w, https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24-300x209.png 300w, https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24-768x534.png 768w, https://transcaribe.gov.co/wp-content/uploads/2021/11/Logo_Transcaribe_24.png 1247w"
+              />
+            </a>
+          </div>
 
-        <form class="d-flex" role="search">
-          <img
-            width="168"
-            height="55"
-            src="https://transcaribe.gov.co/wp-content/uploads/2021/11/GOV.CO_.png"
-            class="attachment-large size-large"
-            alt=""
-          />
-          <input
-            class="form-control me-3 my-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2" type="submit"
-            >Search</button
-          >
-        </form>
+          <form class="d-flex" role="search">
+            <img
+              width="168"
+              height="55"
+              src="https://transcaribe.gov.co/wp-content/uploads/2021/11/GOV.CO_.png"
+              class="attachment-large size-large"
+              alt=""
+            />
+            <input
+              class="form-control me-3 my-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success my-2" type="submit"
+              >Search</button
+            >
+          </form>
+        </div>
+      </nav>
+      <div class="container">
+        <ul class="nav nav-pills nav-fill text-light fw-medium">
+          <li class="nav-item">
+            <a class="nav-link text-light" aria-current="page" href="#"
+              >Transparencia</a
+            >
+          </li>
+          <li class="nav-item p-active">
+            <a class="nav-link text-light" href="#">Crea tu PQRSD</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Galeria</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Noticias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Avisos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Consultar Saldo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Portal del Usuario</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Recargar Saldo</a>
+          </li>
+        </ul>
       </div>
-    </nav>
-    <div class="container">
-      <ul class="nav nav-pills nav-fill text-light fw-medium">
+    </header>
+    <slot />
+    <footer class="orange mt-auto">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <li class="nav-item">
-          <a class="nav-link text-light" aria-current="page" href="#"
-            >Transparencia</a
-          >
-        </li>
-        <li class="nav-item p-active">
-          <a class="nav-link text-light" href="#">Crea tu PQRSD</a>
+          <a href="#" class="nav-link px-2 text-muted">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Galeria</a>
+          <a href="#" class="nav-link px-2 text-muted">Features</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Noticias</a>
+          <a href="#" class="nav-link px-2 text-muted">Pricing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Avisos</a>
+          <a href="#" class="nav-link px-2 text-muted">FAQs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Consultar Saldo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#">Portal del Usuario</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#">Recargar Saldo</a>
+          <a href="#" class="nav-link px-2 text-muted">About</a>
         </li>
       </ul>
-    </div>
-  </header>
-  <body>
-    <slot />
+      <p class="text-center text-muted">© 2022 Company, Inc</p>
+    </footer>
   </body>
-  <footer></footer>
 
   <style is:global>
     .p-active {
       background-color: #e3600f !important;
+    }
+    .orange {
+      background-color: #e3600f !important;
       color:;
     }
-     :root {
-			--accent: 136, 58, 234;
-			--accent-light: 224, 204, 250;
-			--accent-dark: 49, 10, 101;
-			--accent-gradient: linear-gradient(
-				45deg,
-				rgb(var(--accent)),
-				rgb(var(--accent-light)) 30%,
-				white 60%
-			);
-		}
-		html {
-			font-family: system-ui, sans-serif;
-			background: #13151a;
-			background-size: 224px;
-		}
-		code {
-			font-family:
-				Menlo,
-				Monaco,
-				Lucida Console,
-				Liberation Mono,
-				DejaVu Sans Mono,
-				Bitstream Vera Sans Mono,
-				Courier New,
-				monospace;
-		} 
+    :root {
+      --accent: 136, 58, 234;
+      --accent-light: 224, 204, 250;
+      --accent-dark: 49, 10, 101;
+      --accent-gradient: linear-gradient(
+        45deg,
+        rgb(var(--accent)),
+        rgb(var(--accent-light)) 30%,
+        white 60%
+      );
+    }
+    html {
+      font-family: system-ui, sans-serif;
+      background: #13151a;
+      height: 100%;
+    }
+    body {
+      /* min-height: 100vh; */
+      height: 100%;
+    }
+    main {
+      margin: auto;
+      padding-left: 1rem;
+
+      color: rgb(8, 7, 7);
+      font-size: 20px;
+      line-height: 1.6;
+    }
+    code {
+      font-family:
+        Menlo,
+        Monaco,
+        Lucida Console,
+        Liberation Mono,
+        DejaVu Sans Mono,
+        Bitstream Vera Sans Mono,
+        Courier New,
+        monospace;
+    }
   </style>
-
-
 </html>
