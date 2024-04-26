@@ -1,0 +1,31 @@
+---
+interface Props {
+  type: string;
+  amount: string;
+  date: string;
+}
+
+const { type, amount, date } = Astro.props;
+---
+
+<div
+  class="border-bottom border-5 d-flex"
+  style="border-bottom-style: dashed !important;"
+>
+  <div class="d-block">
+    <h2 class:list={["fw-bold", type]}>{type}</h2>
+
+    <span>{date}</span>
+  </div>
+
+  <h1 class="flex-grow-1 ps-5">$ {amount}</h1>
+</div>
+
+<style>
+  .Recarga {
+    color: rgb(53, 182, 53);
+  }
+  .Viaje {
+    color: red;
+  }
+</style>
