@@ -3,40 +3,210 @@ import Layout from "../layouts/Layout.astro";
 import Movement from "../components/Movement.astro";
 ---
 
-<Layout title="User">
-    <main class="w-100 mt-0 mb-0 flex-grow-1 ">
-        <div class="d-flex">
-            <div class="w-50 ">
-                <h1 class="mb-4 fw-bold" style="font-size:9vw;">¡Hola!, Jesus</h1>
-                <div>
-                    <h3 style="font-size:2.5vw;">Tu saldo actual es:</h3>
-                    <div class="d-flex">
-                        <div class="d-flex p-2 rounded fw-bold"
-                            style="background-color: rgba(156, 140, 140, 0.444); font-size: 4vw;">
-                            <div class="mx-2 px-2 rounded" style="background-color: rgb(156, 140, 140)">
-                                0.00
-                            </div>
-                            <div class="">| COP</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-5 d-flex justify-content-center ">
-                    <button type="button" class="btn border"><span class="fw-bold">Recargar Saldo</span></button>
-                </div>
-            </div>
-            <div class="flex-fill pe-5">
-                <span class="fw-bold" style="font-size: 4vw;">Ultimos Movimientos</span>
-                <div class="mt-4" style="overflow-y: auto; max-height: 50vh;">
-                    <Movement type="Recarga" amount="20.000" date="23/01/2024 : 08:50 AM"></Movement>
-                    <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
-                    <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
-                    <Movement type="Recarga" amount="6.000" date="23/01/2024 : 08:50 AM"></Movement>
-                    <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
-                    <Movement type="Recarga" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
-                    <Movement type="Recarga" amount="3.000" date="23/01/2024 : 08:50 AM"></Movement>
-                </div>
-            </div>
+<script>
+  var botones = document.querySelectorAll("button");
 
+  // Función para manejar el clic en un botón
+  function activarBoton() {
+    // Eliminar la clase "active" de todos los botones
+    botones.forEach(function (boton) {
+      boton.classList.remove("active");
+    });
+    // Agregar la clase "active" al botón que se presionó
+    this.classList.add("active");
+  }
+
+  // Agregar el evento clic a cada botón
+  botones.forEach(function (boton) {
+    boton.addEventListener("click", activarBoton);
+  });
+
+  // Función para cambiar el estado y mostrar el colapso correspondiente
+  function changeState(newState) {
+    var collapseElements = document.querySelectorAll(".paymethod");
+
+    // Ocultar todos los colapsos
+    collapseElements.forEach(function (collapse) {
+      collapse.classList.add("collapse");
+    });
+
+    // Mostrar el colapso correspondiente al nuevo estado
+    if (newState === 1) {
+      document.getElementById("collapseOne").classList.remove("collapse");
+    } else if (newState === 2) {
+      document.getElementById("collapseTwo").classList.remove("collapse");
+    } else if (newState === 3) {
+      document.getElementById("collapseThree").classList.remove("collapse");
+    }
+  }
+
+  // Asignar manejadores de eventos a los botones
+  document.getElementById("button1").addEventListener("click", function () {
+    changeState(1);
+  });
+  document.getElementById("button2").addEventListener("click", function () {
+    changeState(2);
+  });
+  document.getElementById("button3").addEventListener("click", function () {
+    changeState(3);
+  });
+</script>
+
+<Layout title="User">
+  <main
+    class="w-100 mt-0 mb-0 flex-grow-1"
+    style="background-color: rgba(224, 219, 219, 0.722);"
+  >
+    <div class="d-flex">
+      <div class="w-50">
+        <h1 class="mb-4 fw-bold" style="font-size:5vw;">¡Hola!, Jesus</h1>
+        <div></div>
+        <div class="mt-5 me-4 d-flex justify-content-between px-4">
+          <button
+            type="button"
+            id="button1"
+            class="btn active"
+            style="background-color: white;  width: 30%;"
+          >
+            <div class="material-symbols-outlined" style="font-size: 50px;">
+              credit_card
+            </div>
+            <div>Credit Card</div>
+          </button>
+          <button
+            type="button"
+            id="button2"
+            class="btn"
+            style="background-color: white;  width: 30%;"
+          >
+            <div class="material-symbols-outlined" style="font-size: 50px;">
+              credit_card
+            </div>
+            <div>PayPal</div>
+          </button>
+          <button
+            type="button"
+            id="button3"
+            class="btn"
+            style="background-color: white; width: 30%;"
+          >
+            <div class="material-symbols-outlined" style="font-size: 50px;">
+              credit_card
+            </div>
+            <div>PSE</div>
+          </button>
         </div>
-    </main>
+        <div class="p-5">
+          <div id="collapseOne" class="paymethod">
+            <div>
+              <strong>This is the first item's accordion body.</strong> It is shown
+              by default, until the collapse plugin adds the appropriate classes
+              that we use to style each element. These classes control the overall
+              appearance, as well as the showing and hiding via CSS transitions.
+              You can modify any of this with custom CSS or overriding our default
+              variables. It's also worth noting that just about any HTML can go within
+              the
+              <code>.accordion-body</code>, though the transition does limit
+              overflow.
+            </div>
+          </div>
+          <div id="collapseTwo" class="paymethod collapse">
+            <div>
+              <strong>This is the second item's accordion body.</strong> It is hidden
+              by default, until the collapse plugin adds the appropriate classes
+              that we use to style each element. These classes control the overall
+              appearance, as well as the showing and hiding via CSS transitions.
+              You can modify any of this with custom CSS or overriding our default
+              variables. It's also worth noting that just about any HTML can go within
+              the
+              <code>.accordion-body</code>, though the transition does limit
+              overflow.
+            </div>
+          </div>
+
+          <div id="collapseThree" class="paymethod collapse">
+            <div>
+              <strong>This is the third item's accordion body.</strong> It is hidden
+              by default, until the collapse plugin adds the appropriate classes
+              that we use to style each element. These classes control the overall
+              appearance, as well as the showing and hiding via CSS transitions.
+              You can modify any of this with custom CSS or overriding our default
+              variables. It's also worth noting that just about any HTML can go within
+              the
+              <code>.accordion-body</code>, though the transition does limit
+              overflow.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-fill pe-5 pt-3">
+        <div class="d-flex align-items-center">
+          <span class="pe-2 fw-bold" style="font-size:2.8vw;">
+            SALDO ACTUAL:</span
+          >
+          <div
+            class="d-flex p-2 rounded fw-bold"
+            style="background-color: rgba(156, 140, 140, 0.444); font-size: 4vw;"
+          >
+            <div
+              class="mx-2 px-2 rounded"
+              style="background-color: rgb(156, 140, 140)"
+            >
+              0.00
+            </div>
+            <div class="">| COP</div>
+          </div>
+        </div>
+        <span class="fw-bold" style="font-size: 2vw;">Ultimos Movimientos</span>
+        <div class="mt-2" style="overflow-y: auto; max-height: 50vh;">
+          <Movement
+            type="Recarga"
+            amount="20.000"
+            date="23/01/2024 : 08:50 AM"
+          />
+          <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM" />
+          <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM" />
+          <Movement
+            type="Recarga"
+            amount="6.000"
+            date="23/01/2024 : 08:50 AM"
+          />
+          <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM" />
+          <Movement
+            type="Recarga"
+            amount="3.000"
+            date="23/01/2024 : 08:50 AM"
+          />
+          <Movement
+            type="Recarga"
+            amount="3.000"
+            date="23/01/2024 : 08:50 AM"
+          />
+        </div>
+      </div>
+    </div>
+  </main>
 </Layout>
+
+<style>
+  .collapse {
+    display: none;
+  }
+  .active {
+    transition: 76ms;
+    /* padding: 10px 40px; */
+    transform: translateY(-0px);
+    box-shadow: rgb(233, 126, 3) 0px 0px 8px -1px;
+    background-color: #fff;
+    color: #000000;
+    border: solid 2px #f07000;
+  }
+
+  .btn {
+    font-family: Roboto, sans-serif;
+    font-weight: bolder;
+    transform: translateY(0);
+    align-items: center;
+    cursor: pointer;
+  }
+</style>

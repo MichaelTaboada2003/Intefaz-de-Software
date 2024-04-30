@@ -8,24 +8,30 @@ interface Props {
 const { type, amount, date } = Astro.props;
 ---
 
-<div
-  class="border-bottom border-5 d-flex"
-  style="border-bottom-style: dashed !important;"
->
+<!-- style="border-bottom-style: dashed !important; " -->
+<div class:list={["border-bottom border-5 d-flex px-3", type]}>
   <div class="d-block">
-    <h2 class:list={["fw-bold", type]}>{type}</h2>
-
+    <h4 class:list={["fw-bold"]}>{type}</h4>
     <span>{date}</span>
   </div>
-
-  <h1 class="flex-grow-1 ps-5">$ {amount}</h1>
+  <h2 class="flex-grow-1 ps-5">$ {amount}</h2>
 </div>
 
 <style>
   .Recarga {
-    color: rgb(53, 182, 53);
+    background-color: rgba(53, 182, 53, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0px);
+    border-radius: 16px;
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid rgb(56, 217, 96);
   }
   .Viaje {
-    color: red;
+    background-color: rgba(227, 27, 27, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0px);
+    border-radius: 16px;
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid rgb(217, 56, 56);
   }
 </style>
