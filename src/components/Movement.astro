@@ -8,7 +8,6 @@ interface Props {
 const { type, amount, date } = Astro.props;
 ---
 
-<!-- style="border-bottom-style: dashed !important; " -->
 <div class:list={["border-bottom border-5 d-flex px-3", type]}>
   <div class="d-block">
     <h4 class:list={["fw-bold"]}>{type}</h4>
@@ -16,6 +15,8 @@ const { type, amount, date } = Astro.props;
   </div>
   <h2 class="flex-grow-1 ps-5">$ {amount}</h2>
 </div>
+
+
 
 <style>
   .Recarga {
