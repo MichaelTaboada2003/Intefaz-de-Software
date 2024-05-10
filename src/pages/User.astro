@@ -4,135 +4,23 @@ import Movement from "../components/Movement.astro";
 ---
 
 <script>
-  var botones = [
-    document.getElementById("button1"),
-    document.getElementById("button2"),
-    document.getElementById("button3"),
-  ];
+  document.addEventListener('DOMContentLoaded', function() {
+    const storedUsername = localStorage.getItem('username'); 
+    const greetingElement = document.getElementById('userGreeting'); 
 
-  // Función para manejar el clic en un botón
-  function activarBoton() {
-    console.log("asdas");
-    // Eliminar la clase "active" de todos los botones
-    botones.forEach(function (boton) {
-      boton?.classList.remove("active");
-    });
-    // Agregar la clase "active" al botón que se presionó
-    this.classList.add("active");
-  }
-
-  // Agregar el evento clic a cada botón
-  botones.forEach(function (boton) {
-    boton?.addEventListener("click", activarBoton);
+    if (storedUsername && greetingElement) { 
+      greetingElement.textContent = `¡Hola!, ${storedUsername}`; 
+    } else {
+      console.error('Greeting element or username not found');
+    }
   });
-
-  // Función para cambiar el estado y mostrar el colapso correspondiente
-  function changeState(newState) {
-    var collapseElements = document.querySelectorAll(".paymethod");
-
-    // Ocultar todos los colapsos
-    collapseElements.forEach(function (collapse) {
-      collapse.classList.add("collapse");
-    });
-
-    // Mostrar el colapso correspondiente al nuevo estado
-    if (newState === 1) {
-      document.getElementById("collapseOne").classList.remove("collapse");
-    } else if (newState === 2) {
-      document.getElementById("collapseTwo").classList.remove("collapse");
-    } else if (newState === 3) {
-      document.getElementById("collapseThree").classList.remove("collapse");
-    }
-  }
-
-  // Asignar manejadores de eventos a los botones
-  document.getElementById("button1").addEventListener("click", function () {
-    changeState(1);
-  });
-  document.getElementById("button2").addEventListener("click", function () {
-    changeState(2);
-  });
-  document.getElementById("button3").addEventListener("click", function () {
-    changeState(3);
-  });
-
-  (() => {
-    "use strict";
-
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll(".needs-validation");
-
-    // Loop over them and prevent submission
-    Array.from(forms).forEach((form) => {
-      form.addEventListener(
-        "submit",
-        (event) => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
-  })();
-
-  //For Card Number formatted input
-  var cardNum = document.getElementById("cr_no");
-  cardNum.onkeyup = function (e) {
-    if (this.value == this.lastValue) return;
-    var caretPosition = this.selectionStart;
-    var sanitizedValue = this.value.replace(/[^0-9]/gi, "");
-    var parts = [];
-
-    for (var i = 0, len = sanitizedValue.length; i < len; i += 4) {
-      parts.push(sanitizedValue.substring(i, i + 4));
-    }
-
-    for (var i = caretPosition - 1; i >= 0; i--) {
-      var c = this.value[i];
-      if (c < "0" || c > "9") {
-        caretPosition--;
-      }
-    }
-    caretPosition += Math.floor(caretPosition / 4);
-
-    this.value = this.lastValue = parts.join("-");
-    this.selectionStart = this.selectionEnd = caretPosition;
-  };
-
-  //For Date formatted input
-  var expDate = document.getElementById("exp");
-  expDate.onkeyup = function (e) {
-    if (this.value == this.lastValue) return;
-    var caretPosition = this.selectionStart;
-    var sanitizedValue = this.value.replace(/[^0-9]/gi, "");
-    var parts = [];
-
-    for (var i = 0, len = sanitizedValue.length; i < len; i += 2) {
-      parts.push(sanitizedValue.substring(i, i + 2));
-    }
-
-    for (var i = caretPosition - 1; i >= 0; i--) {
-      var c = this.value[i];
-      if (c < "0" || c > "9") {
-        caretPosition--;
-      }
-    }
-    caretPosition += Math.floor(caretPosition / 2);
-
-    this.value = this.lastValue = parts.join("/");
-    this.selectionStart = this.selectionEnd = caretPosition;
-  };
 </script>
+
 
 <Layout title="User">
   <div class="d-flex">
     <div class="w-50">
-      <h1 class="mb-4 fw-bold" style="font-size:5vw;">¡Hola!, Jesus</h1>
-      <div></div>
+      <h1 class="fw-bold" id="userGreeting">¡Hola!</h1>
       <div class="mt-5 me-4 d-flex justify-content-between px-4">
         <button
           type="button"
@@ -188,7 +76,7 @@ import Movement from "../components/Movement.astro";
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">Llena el campo</div>
               </div>
-              <!--  -->
+
               <div class="col-md-4 w-100 py-3">
                 <label for="cr_no" class="form-label">Card Number</label>
                 <input
@@ -221,7 +109,6 @@ import Movement from "../components/Movement.astro";
                   <div class="valid-feedback">Looks good!</div>
                   <div class="invalid-feedback">Llena el campo</div>
                 </div>
-                <!--  -->
                 <div class="col-md-4 flex-fill">
                   <label for="exp" class="form-label">Expiration Date</label>
                   <input
@@ -273,26 +160,18 @@ import Movement from "../components/Movement.astro";
         </div>
       </div>
     </div>
+    
     <div class="flex-fill pe-5 pt-3">
-      <div class="d-flex align-items-center">
-        <span class="pe-2 fw-bold" style="font-size:2.8vw;">
-          SALDO ACTUAL:</span
-        >
-        <div
-          class="d-flex p-2 rounded fw-bold"
-          style="background-color: rgba(156, 140, 140, 0.444); font-size: 4vw;"
-        >
-          <div
-            class="mx-2 px-2 rounded"
-            style="background-color: rgb(156, 140, 140)"
-          >
-            0.00
-          </div>
-          <div class="">| COP</div>
+      <div class="d-flex align-items-center justify-content-start saldo-actual">
+        <span class="fw-bold" style="font-size: 2.8vw;">SALDO ACTUAL:</span>
+        <div class="saldo">
+          <span class="monto" style="font-size: 4vw;">$10.000,00</span>
+          <span class="moneda">COP</span>
         </div>
       </div>
-      <span class="fw-bold" style="font-size: 2vw;">Ultimos Movimientos</span>
-      <div class="mt-2" style="overflow-y: auto; max-height: 50vh;">
+       
+      <span class="fw-bold movimientos-title" style="font-size: 2vw;">Últimos Movimientos</span>
+      <div class="mt-2" style="overflow-y: auto; max-height: 79vh;">
         <Movement type="Recarga" amount="20.000" date="23/01/2024 : 08:50 AM" />
         <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM" />
         <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM" />
@@ -311,7 +190,6 @@ import Movement from "../components/Movement.astro";
   }
   .active {
     transition: 76ms;
-    /* padding: 10px 40px; */
     transform: translateY(-0px);
     box-shadow: rgb(233, 126, 3) 0px 0px 8px -1px;
     background-color: #fff;
@@ -326,4 +204,75 @@ import Movement from "../components/Movement.astro";
     align-items: center;
     cursor: pointer;
   }
+  .saldo-actual {
+  padding: 20px;
+  background-color: #ffffff; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  margin-top: 20px; 
+}
+
+.saldo {
+  display: flex;
+  align-items: baseline; 
+  margin-left: 10px; 
+}
+
+.monto {
+  font-weight: bold;
+  color: #0d1a0e; 
+  margin-right: 5px; 
+}
+
+.moneda {
+  font-size: 2vw;
+  color: #666666; 
+}
+
+.paymethod {
+  padding: 10px; 
+  background-color: #fff; 
+  border-radius: 8px; 
+  border: 1px solid #ccc; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.form-control {
+  border-radius: 4px; 
+  border: 1px solid #ccc; 
+  padding: 6px 10px; 
+}
+
+.btn-primary {
+  background-color: #0056b3; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 4px; 
+  color: white;
+  font-weight: bold; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+#userGreeting {
+  font-size: 5vw; 
+  color: #2c3e50;
+  text-shadow: 1px 1px 2px #bdc3c7; 
+  margin-top: 20px; 
+  padding: 10px 20px; 
+  border-bottom: 2px solid #b97629;
+  background-color: rgba(236, 240, 241, 0.5); 
+  border-radius: 5px; 
+  display: inline-block; 
+  text-align: center; 
+}
+
+.movimientos-title {
+  display: block; 
+  margin-top: 20px; 
+  margin-bottom: 20px; 
+  font-weight: bold; 
+}
+
+
+
 </style>

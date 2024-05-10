@@ -1,35 +1,66 @@
 <main>
-  <div class="contenedor">
-    <form action="/User">
-      <h1>Login</h1>
-      <div class="entrada">
-        <input type="text" name="username" placeholder="Username" required autocomplete="off"/>
-        <i class="bi bi-person-fill"></i>
-      </div>
-      <div class="entrada">
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-        <i class="bi bi-lock-fill"></i>
-      </div>
-      <div class="etiqueta">
-        <label for="remember"
-          ><input type="checkbox" name="remember" id="remember" /> Remember me</label
-        >
-        <a href="#">Forgot your password?</a>
-      </div>
-      <div>
-        <button type="submit" class="boton">Login</button>
-      </div>
-      <div class="registrarse">
-        <p>Don't have an account? <a href="#"> Register</a></p>
-      </div>
-    </form>
-  </div>
-</main>
+    <div class="contenedor">
+      <form id="loginForm">
+        <h1>Login</h1>
+        <div class="entrada">
+          <input type="text" name="username" placeholder="Username" required autocomplete="off"/>
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="entrada">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <i class="bi bi-lock-fill"></i>
+        </div>
+        <div class="etiqueta">
+          <label for="remember"><input type="checkbox" name="remember" id="remember" /> Remember me</label>
+          <a href="#">Forgot your password?</a>
+        </div>
+        <div>
+          <button type="submit" class="boton">Login</button>
+        </div>
+        <div class="registrarse">
+          <p>Don't have an account? <a href="#"> Register</a></p>
+        </div>
+      </form>
+    </div>
+  </main>
+  
+<script>
+document.getElementById('loginForm')!.onsubmit = function (event) {
+    event.preventDefault();
+    const usernameInput = document.querySelector('[name="username"]') as HTMLInputElement;  
+    if (usernameInput && usernameInput.value) {  
+        localStorage.setItem('username', usernameInput.value); 
+        window.location.href = '/User'; 
+        console.error('Username is required');
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('loginForm');
+    if (form) {
+      form.onsubmit = function(event) {
+        event.preventDefault();
+       
+        const usernameElement = document.querySelector('[name="username"]') as HTMLInputElement;
+        if (usernameElement && usernameElement.value) {  
+          localStorage.setItem('username', usernameElement.value);
+          window.location.href = '/User';
+        } else {
+          console.error('Username is required');
+        }
+      };
+    } else {
+      console.error('LoginForm not found');
+    }
+  });
+
+</script>
+  
 
 <style>
   @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap");
