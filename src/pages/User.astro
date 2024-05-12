@@ -4,23 +4,159 @@ import Movement from "../components/Movement.astro";
 ---
 
 <script>
+
+declare global {
+  interface HTMLInputElement {
+    lastValue?: string;
+  }
+}
+
+const botones: (HTMLElement | null)[] = [
+  document.getElementById("button1"),
+  document.getElementById("button2"),
+  document.getElementById("button3"),
+];
+
+// Función para manejar el clic en un botón
+function activarBoton(this: HTMLElement): void {
+  console.log("Botón activado");
+  // Eliminar la clase "active" de todos los botones
+  botones.forEach((boton: HTMLElement | null) => {
+    boton?.classList.remove("active");
+  });
+  // Agregar la clase "active" al botón que se presionó
+  this.classList.add("active");
+}
+
+// Agregar el evento clic a cada botón
+botones.forEach((boton: HTMLElement | null) => {
+  boton?.addEventListener("click", activarBoton);
+});
+
+// Función para cambiar el estado y mostrar el colapso correspondiente
+function changeState(newState: number): void {
+  const collapseElements: NodeListOf<HTMLElement> = document.querySelectorAll(".paymethod");
+
+  // Ocultar todos los colapsos
+  collapseElements.forEach((collapse: HTMLElement) => {
+    collapse.classList.add("collapse");
+  });
+
+  // Mostrar el colapso correspondiente al nuevo estado
+  switch (newState) {
+    case 1:
+      document.getElementById("collapseOne")?.classList.remove("collapse");
+      break;
+    case 2:
+      document.getElementById("collapseTwo")?.classList.remove("collapse");
+      break;
+    case 3:
+      document.getElementById("collapseThree")?.classList.remove("collapse");
+      break;
+  }
+}
+
+// Asignar manejadores de eventos a los botones
+document.getElementById("button1")?.addEventListener("click", () => changeState(1));
+document.getElementById("button2")?.addEventListener("click", () => changeState(2));
+document.getElementById("button3")?.addEventListener("click", () => changeState(3));
+
+(() => {
+  "use strict";
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms: NodeListOf<HTMLFormElement> = document.querySelectorAll(".needs-validation");
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach((form: HTMLFormElement) => {
+    form.addEventListener(
+      "submit",
+      (event: Event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+})();
+
+// For Card Number formatted input
+const cardNum: HTMLInputElement | null = document.getElementById("cr_no") as HTMLInputElement;
+if (cardNum) {
+  cardNum.onkeyup = handleCardNumKeyUp.bind(cardNum);
+}
+
+function handleCardNumKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
+  if (this.value === this.lastValue) return;
+  let caretPosition = this.selectionStart ?? 0;
+  const sanitizedValue = this.value.replace(/[^0-9]/gi, "");
+  const parts: string[] = [];
+
+  for (let i = 0, len = sanitizedValue.length; i < len; i += 4) {
+    parts.push(sanitizedValue.substring(i, i + 4));
+  }
+
+  for (let i = caretPosition - 1; i >= 0; i--) {
+    const c = this.value[i];
+    if (c < "0" || c > "9") {
+      caretPosition--;
+    }
+  }
+  caretPosition += Math.floor(caretPosition / 4);
+
+  this.value = this.lastValue = parts.join("-");
+  this.selectionStart = this.selectionEnd = caretPosition;
+}
+
+// For Date formatted input
+const expDate: HTMLInputElement | null = document.getElementById("exp") as HTMLInputElement;
+if (expDate) {
+  expDate.onkeyup = handleExpDateKeyUp.bind(expDate);
+}
+
+function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
+  if (this.value === this.lastValue) return;
+  let caretPosition = this.selectionStart ?? 0;
+  const sanitizedValue = this.value.replace(/[^0-9]/gi, "");
+  const parts: string[] = [];
+
+  for (let i = 0, len = sanitizedValue.length; i < len; i += 2) {
+    parts.push(sanitizedValue.substring(i, i + 2));
+  }
+
+  for (let i = caretPosition - 1; i >= 0; i--) {
+    const c = this.value[i];
+    if (c < "0" || c > "9") {
+      caretPosition--;
+    }
+  }
+  caretPosition += Math.floor(caretPosition / 2);
+
+  this.value = this.lastValue = parts.join("/");
+  this.selectionStart = this.selectionEnd = caretPosition;
+};
+
   document.addEventListener('DOMContentLoaded', function() {
     const storedUsername = localStorage.getItem('username'); 
     const greetingElement = document.getElementById('userGreeting'); 
 
     if (storedUsername && greetingElement) { 
-      greetingElement.textContent = `¡Hola!, ${storedUsername}`; 
+      greetingElement.textContent = `¡Hola!, ${storedUsername}`;
+      greetingElement.classList.add('fade-in'); 
     } else {
       console.error('Greeting element or username not found');
     }
   });
 </script>
 
-
 <Layout title="User">
   <div class="d-flex">
     <div class="w-50">
-      <h1 class="fw-bold" id="userGreeting">¡Hola!</h1>
+      <h1 class="fw-bold" id="userGreeting"></h1>
       <div class="mt-5 me-4 d-flex justify-content-between px-4">
         <button
           type="button"
@@ -255,12 +391,11 @@ import Movement from "../components/Movement.astro";
 
 #userGreeting {
   font-size: 5vw; 
-  color: #2c3e50;
+  color: #050708;
   text-shadow: 1px 1px 2px #bdc3c7; 
   margin-top: 20px; 
   padding: 10px 20px; 
-  border-bottom: 2px solid #b97629;
-  background-color: rgba(236, 240, 241, 0.5); 
+  background-color: #ffffff;
   border-radius: 5px; 
   display: inline-block; 
   text-align: center; 
@@ -273,6 +408,20 @@ import Movement from "../components/Movement.astro";
   font-weight: bold; 
 }
 
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-50px); 
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: slideInRight 1.5s ease-out forwards;
+}
 
 
 </style>
