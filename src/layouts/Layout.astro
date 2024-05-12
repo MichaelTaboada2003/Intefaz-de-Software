@@ -47,32 +47,11 @@ const { title } = Astro.props;
   </body>
 
   <style is:global>
-    .p-active {
-      background-color: #e3600f !important;
-    }
-    .orange {
-      background-color: #e3600f !important;
-      color:;
-    }
-    :root {
-      --accent: 136, 58, 234;
-      --accent-light: 224, 204, 250;
-      --accent-dark: 49, 10, 101;
-      --accent-gradient: linear-gradient(
-        45deg,
-        rgb(var(--accent)),
-        rgb(var(--accent-light)) 30%,
-        white 60%
-      );
-    }
     html {
       font-family: system-ui, sans-serif;
       height: 100%;
     }
-    body {
-      /* min-height: 100vh; */
-      height: 100%;
-    }
+
     main {
       margin: auto;
       padding-left: 1rem;
