@@ -3,9 +3,7 @@ import ImageSlider from '../components/Slider.jsx';
 ---
 
 <script>
-    
-// Asumiendo que modal, modalImg, y captionText realmente existen en tu HTML.
-// Declararlos como HTMLElement podría requerir aserciones de tipo adicionales si usas métodos específicos más adelante.
+
 
 const modal = document.getElementById("mapModal") as HTMLElement | null;
 const img = document.querySelector('.general-map') as HTMLImageElement | null;
@@ -32,7 +30,7 @@ if (span) {
     console.error('Element with class "close" was not found.');
 }
 </script>
-    
+ 
 <body>
     <main>
       <div class="content">
