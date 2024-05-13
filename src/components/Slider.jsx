@@ -31,7 +31,7 @@ const ImageSlider = () => {
         <div className="container">
             <img className="control prev" src="https://i.postimg.cc/W47WzSmc/img1.png" alt="Scroll Left" onClick={scrollLeft} />
             <div className="slider" ref={sliderRef}>
-                {['https://i.postimg.cc/3Nzww1RC/Rutas-X-101.png', 'https://i.postimg.cc/c4MHWRWY/Rutas-X-102.png', 'https://i.postimg.cc/htsfL93g/Rutas-X103-Act-Min.png', 'https://i.postimg.cc/zDhvtmPx/Rutas-X-104.png', 'https://i.postimg.cc/prKdp8nw/Rutas-X-105.png', 'https://i.postimg.cc/7Zw5JB9m/Rutas-X-106.png', 'https://i.postimg.cc/5yzXLTDk/RT100E.png', 'https://i.postimg.cc/6642k4TL/RT101.png'].map((src, index) => (
+                {['https://i.postimg.cc/3Nzww1RC/Rutas-X-101.png', 'https://i.postimg.cc/c4MHWRWY/Rutas-X-102.png', 'https://i.postimg.cc/htsfL93g/Rutas-X103-Act-Min.png', 'https://i.postimg.cc/zDhvtmPx/Rutas-X-104.png', 'https://i.postimg.cc/prKdp8nw/Rutas-X-105.png', 'https://i.postimg.cc/7Zw5JB9m/Rutas-X-106.png', 'https://i.postimg.cc/5yzXLTDk/RT100E.png', 'https://i.postimg.cc/6642k4TL/RT101.png', 'https://i.postimg.cc/fTx3L4cV/RT102.png'].map((src, index) => (
                     <img key={index} src={src} alt="Rutas" onClick={() => openModal(src)} />
                 ))}
             </div>

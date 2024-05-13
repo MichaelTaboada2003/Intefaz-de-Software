@@ -3,25 +3,34 @@ import ImageSlider from '../components/Slider.jsx';
 ---
 
 <script>
-    // Obtén el modal
-    var modal = document.getElementById("mapModal");
     
-    // Obtén la imagen y inserta dentro del modal - usa su "alt" como caption
-    var img = document.querySelector('.general-map');
-    var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
-    img.onclick = function(){
-      modal.style.display = "block";
-      modalImg.src = this.src;
-      captionText.innerHTML = this.alt;
-    }
-    
-    // Obtén el elemento <span> que cierra el modal
-    var span = document.getElementsByClassName("close")[0];
-    
-    span.onclick = function() { 
-      modal.style.display = "none";
-    }
+// Asumiendo que modal, modalImg, y captionText realmente existen en tu HTML.
+// Declararlos como HTMLElement podría requerir aserciones de tipo adicionales si usas métodos específicos más adelante.
+
+const modal = document.getElementById("mapModal") as HTMLElement | null;
+const img = document.querySelector('.general-map') as HTMLImageElement | null;
+const modalImg = document.getElementById("img01") as HTMLImageElement | null;
+const captionText = document.getElementById("caption") as HTMLElement | null;
+
+if (img && modal && modalImg && captionText) {
+    img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = img.src;
+        captionText.innerHTML = img.alt; // Suponemos que 'alt' es una propiedad de img.
+    };
+}
+
+const span = document.getElementsByClassName("close")[0] as HTMLElement | undefined;
+
+if (span) {
+    span.onclick = function () {
+        if (modal) {
+            modal.style.display = "none";
+        }
+    };
+} else {
+    console.error('Element with class "close" was not found.');
+}
 </script>
     
 <body>
