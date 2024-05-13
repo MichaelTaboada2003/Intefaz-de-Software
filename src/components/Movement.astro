@@ -8,50 +8,60 @@ interface Props {
 const { type, amount, date } = Astro.props;
 ---
 
-<div class:list={["movement-item d-flex align-items-center justify-content-between p-3", type]}>
+<div
+  class:list={[
+    "movement-item d-flex align-items-center justify-content-between p-3",
+    type,
+  ]}
+>
   <div>
     <h4 class:list={["fw-bold m-0"]}>{type}</h4>
     <span class="text-muted">{date}</span>
   </div>
+  {
+    type == "Viaje" && (
+      <img src="src/bus.png" alt="A bird." height="100" width="100" />
+    )}{
+    type == "Recarga" && (
+      <img src="src/recarga.png" alt="A bird." height="80" width="80" />
+    )
+  }
+
   <h2 class="m-0 text-end">$ {amount}</h2>
 </div>
 
-
-
-
 <style>
-.movement-item {
-  border-bottom: 2px solid #ddd;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
+  .movement-item {
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
 
-.movement-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
+  .movement-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
 
-.Recarga {
-  background-color: #f0fff0; 
-  border-left: 5px solid #4CAF50;
-}
+  .Recarga {
+    background-color: #f0fff0;
+    border-left: 5px solid #4caf50;
+  }
 
-.Viaje {
-  background-color: #fff0f0; 
-  border-left: 5px solid #F44336; 
-}
+  .Viaje {
+    background-color: #fff0f0;
+    border-left: 5px solid #f44336;
+  }
 
-.text-muted {
-  color: #6c757d;
-}
+  .text-muted {
+    color: #6c757d;
+  }
 
-h4 {
-  font-size: 1.2rem;
-}
+  h4 {
+    font-size: 1.2rem;
+  }
 
-h2 {
-  font-size: 1.5rem;
-}
-
+  h2 {
+    font-size: 1.5rem;
+  }
 </style>
