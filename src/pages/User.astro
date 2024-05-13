@@ -1,6 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Movement from "../components/Movement.astro";
+import CreditCard from "../Icons/CreditCard.astro";
+import PayPal from "../Icons/Paypal.astro";
+import PSE from "../Icons/PSE.astro";
 ---
 
 <script>
@@ -17,32 +20,25 @@ const botones: (HTMLElement | null)[] = [
   document.getElementById("button3"),
 ];
 
-// Función para manejar el clic en un botón
 function activarBoton(this: HTMLElement): void {
   console.log("Botón activado");
-  // Eliminar la clase "active" de todos los botones
   botones.forEach((boton: HTMLElement | null) => {
     boton?.classList.remove("active");
   });
-  // Agregar la clase "active" al botón que se presionó
   this.classList.add("active");
 }
 
-// Agregar el evento clic a cada botón
 botones.forEach((boton: HTMLElement | null) => {
   boton?.addEventListener("click", activarBoton);
 });
 
-// Función para cambiar el estado y mostrar el colapso correspondiente
 function changeState(newState: number): void {
   const collapseElements: NodeListOf<HTMLElement> = document.querySelectorAll(".paymethod");
 
-  // Ocultar todos los colapsos
   collapseElements.forEach((collapse: HTMLElement) => {
     collapse.classList.add("collapse");
   });
 
-  // Mostrar el colapso correspondiente al nuevo estado
   switch (newState) {
     case 1:
       document.getElementById("collapseOne")?.classList.remove("collapse");
@@ -56,7 +52,6 @@ function changeState(newState: number): void {
   }
 }
 
-// Asignar manejadores de eventos a los botones
 document.getElementById("button1")?.addEventListener("click", () => changeState(1));
 document.getElementById("button2")?.addEventListener("click", () => changeState(2));
 document.getElementById("button3")?.addEventListener("click", () => changeState(3));
@@ -64,10 +59,8 @@ document.getElementById("button3")?.addEventListener("click", () => changeState(
 (() => {
   "use strict";
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms: NodeListOf<HTMLFormElement> = document.querySelectorAll(".needs-validation");
 
-  // Loop over them and prevent submission
   Array.from(forms).forEach((form: HTMLFormElement) => {
     form.addEventListener(
       "submit",
@@ -84,7 +77,6 @@ document.getElementById("button3")?.addEventListener("click", () => changeState(
   });
 })();
 
-// For Card Number formatted input
 const cardNum: HTMLInputElement | null = document.getElementById("cr_no") as HTMLInputElement;
 if (cardNum) {
   cardNum.onkeyup = handleCardNumKeyUp.bind(cardNum);
@@ -112,7 +104,6 @@ function handleCardNumKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
   this.selectionStart = this.selectionEnd = caretPosition;
 }
 
-// For Date formatted input
 const expDate: HTMLInputElement | null = document.getElementById("exp") as HTMLInputElement;
 if (expDate) {
   expDate.onkeyup = handleExpDateKeyUp.bind(expDate);
@@ -153,54 +144,32 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
   });
 </script>
 
-<Layout title="User">
+<Layout title="Usuario">
   <div class="d-flex">
     <div class="w-50">
       <h1 class="fw-bold" id="userGreeting"></h1>
       <div class="mt-5 me-4 d-flex justify-content-between px-4">
-        <button
-          type="button"
-          id="button1"
-          class="btn active method"
-          style="background-color: white;  width: 30%;"
-        >
-          <div class="material-symbols-outlined" style="font-size: 50px;">
-            credit_card
-          </div>
-          <div>Credit Card</div>
+        <button type="button" id="button1" class="btn active method" style="background-color: white; width: 30%;">
+          <CreditCard class="icon"/>
+          <div>Crédito</div>
         </button>
-        <button
-          type="button"
-          id="button2"
-          class="btn"
-          style="background-color: white;  width: 30%;"
-        >
-          <div class="material-symbols-outlined" style="font-size: 50px;">
-            credit_card
-          </div>
+        <button type="button" id="button2" class="btn" style="background-color: white; width: 30%;">
+          <PayPal class="icon"/>
           <div>PayPal</div>
         </button>
-        <button
-          type="button"
-          id="button3"
-          class="btn"
-          style="background-color: white; width: 30%;"
-        >
-          <div class="material-symbols-outlined" style="font-size: 50px;">
-            credit_card
-          </div>
+        <button type="button" id="button3" class="btn" style="background-color: white; width: 30%;">
+          <PSE class="icon"/>
           <div>PSE</div>
         </button>
       </div>
+
       <div class="p-5">
         <div id="collapseOne" class="paymethod">
           <div>
             <form class="g-3 needs-validation" novalidate>
-              <!--  -->
-              <div class="col-md-4 w-100 py-3">
-                <label for="validationCustom01" class="form-label pay"
-                  >Name on Card</label
-                >
+
+              <div class="py-3">
+                <label for="validationCustom01" class="form-label pay">Nombre en la Tarjeta</label>
                 <input
                   type="text"
                   class="form-control"
@@ -209,12 +178,12 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
                   placeholder="John Smith"
                   required
                 />
-                <div class="valid-feedback">Looks good!</div>
+                <div class="valid-feedback">¡Se ve bien!</div>
                 <div class="invalid-feedback">Llena el campo</div>
               </div>
 
-              <div class="col-md-4 w-100 py-3">
-                <label for="cr_no" class="form-label">Card Number</label>
+              <div class="py-3">
+                <label for="cr_no" class="form-label">Número de Tarjeta</label>
                 <input
                   type="text"
                   class="form-control"
@@ -225,12 +194,11 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
                   maxlength="19"
                   required
                 />
-                <div class="valid-feedback">Looks good!</div>
+                <div class="valid-feedback">¡Se ve bien!</div>
                 <div class="invalid-feedback">Llena el campo</div>
               </div>
-              <div class="row flex-fill py-3">
-                <!--  -->
-                <div class="col-md-4 flex-fill">
+
+              <div class="py-3">
                   <label for="validationCustom03" class="form-label">CVV</label>
                   <input
                     type="password"
@@ -242,58 +210,132 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
                     id="validationCustom03"
                     required
                   />
-                  <div class="valid-feedback">Looks good!</div>
+                  <div class="valid-feedback">¡Se ve bien!</div>
                   <div class="invalid-feedback">Llena el campo</div>
-                </div>
-                <div class="col-md-4 flex-fill">
-                  <label for="exp" class="form-label">Expiration Date</label>
+              </div>
+               
+                <div class="py-3">
+                  <label for="exp" class="form-label">Fecha de Expiración</label>
                   <input
                     type="text"
                     name="exp"
                     class="form-control"
                     id="exp"
-                    placeholder="MM/YY"
+                    placeholder="MM/AA"
                     minlength="5"
                     maxlength="5"
                     required
                   />
-                  <div class="valid-feedback">Looks good!</div>
+                  <div class="valid-feedback">¡Se ve bien!</div>
                   <div class="invalid-feedback">Llena el campo</div>
                 </div>
-              </div>
+
+              
+
               <div class="py-3">
-                <button class="btn btn-primary" type="submit"
-                  >Submit form</button
-                >
+                <label for="amount" class="form-label">Monto a Recargar</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="amount"
+                  id="amount"
+                  placeholder="Ingresa el monto"
+                  min="0"
+                  step="1000"
+                  required
+                />
+                <div class="valid-feedback">¡Se ve bien!</div>
+                <div class="invalid-feedback">Por favor, llena este campo.</div>
+              </div>
+
+              <div class="py-3">
+                <button class="btn btn-primary" type="submit">Pagar con Tarjeta</button>
+              </div>        
+            </form>
+          </div>
+        </div>
+        
+        <div id="collapseTwo" class="paymethod collapse">
+          <div>
+            <form class="g-3 needs-validation" novalidate>
+              <div class="py-3">
+                <label for="paypalEmail" class="form-label">Correo electrónico</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="paypalEmail"
+                  name="paypalEmail"
+                  placeholder="ejemplo@correo.com"
+                  required
+                />
+                <div class="valid-feedback">¡Se ve bien!</div>
+                <div class="invalid-feedback">Por favor, introduce un correo electrónico válido.</div>
+              </div>
+        
+              <div class="py-3">
+                <label for="paypalAmount" class="form-label">Monto a Recargar</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="paypalAmount"
+                  name="paypalAmount"
+                  placeholder="Ingresa el monto"
+                  min="0"
+                  step="1000"
+                  required
+                />
+                <div class="valid-feedback">¡Se ve bien!</div>
+                <div class="invalid-feedback">Por favor, introduce un monto válido.</div>
+              </div>
+     
+              <div class="py-3">
+                <button class="btn btn-primary" type="submit">Pagar con PayPal</button>
               </div>
             </form>
           </div>
         </div>
-        <div id="collapseTwo" class="paymethod collapse">
-          <div>
-            <strong>This is the second item's accordion body.</strong> It is hidden
-            by default, until the collapse plugin adds the appropriate classes that
-            we use to style each element. These classes control the overall appearance,
-            as well as the showing and hiding via CSS transitions. You can modify
-            any of this with custom CSS or overriding our default variables. It's
-            also worth noting that just about any HTML can go within the
-            <code>.accordion-body</code>, though the transition does limit
-            overflow.
-          </div>
-        </div>
+        
 
         <div id="collapseThree" class="paymethod collapse">
           <div>
-            <strong>This is the third item's accordion body.</strong> It is hidden
-            by default, until the collapse plugin adds the appropriate classes that
-            we use to style each element. These classes control the overall appearance,
-            as well as the showing and hiding via CSS transitions. You can modify
-            any of this with custom CSS or overriding our default variables. It's
-            also worth noting that just about any HTML can go within the
-            <code>.accordion-body</code>, though the transition does limit
-            overflow.
+            <form class="g-3 needs-validation" novalidate>
+              <div class="py-3">
+                <label for="bankSelection" class="form-label">Selecciona tu Banco</label>
+                <select class="form-control" id="bankSelection" name="bankSelection" required>
+                  <option value="">Elige un Banco</option>
+                  <option value="banco1">Lulo Bank</option>
+                  <option value="banco2">Nu Bank</option>
+                  <option value="banco3">Pibank</option>
+                  <option value="banco4">Ualá</option>
+                  <option value="banco4">Bancolombia</option>
+                </select>
+                <div class="valid-feedback">¡Todo correcto!</div>
+                <div class="invalid-feedback">Por favor, selecciona un banco.</div>
+              </div>
+        
+              <div class="py-3">
+                <label for="pseAmount" class="form-label">Monto a Recargar</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="pseAmount"
+                  name="pseAmount"
+                  placeholder="Ingresa el monto"
+                  min="0"
+                  step="1000"
+                  required
+                />
+                <div class="valid-feedback">¡Todo correcto!</div>
+                <div class="invalid-feedback">Por favor, introduce un monto válido.</div>
+              </div>
+        
+              <div class="py-3">
+                <button class="btn btn-primary" type="submit">Pagar con PSE</button>
+              </div>
+            </form>
           </div>
         </div>
+        
       </div>
     </div>
     
@@ -307,7 +349,7 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
       </div>
        
       <span class="fw-bold movimientos-title" style="font-size: 2vw;">Últimos Movimientos</span>
-      <div class="mt-2" style="overflow-y: auto; max-height: 79vh;">
+      <div class="mt-2" style="overflow-y: auto; max-height: 70vh;">
         <Movement type="Recarga" amount="20.000" date="23/01/2024 : 08:50 AM" />
         <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM" />
         <Movement type="Viaje" amount="3.000" date="23/01/2024 : 08:50 AM" />
@@ -333,13 +375,42 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
     border: solid 2px #f07000;
   }
 
-  .btn {
-    font-family: Roboto, sans-serif;
-    font-weight: bolder;
-    transform: translateY(0);
-    align-items: center;
-    cursor: pointer;
-  }
+.icon {
+  width: 50px;  /* Ajusta el tamaño según sea necesario */
+  height: 50px; /* Ajusta el tamaño según sea necesario */
+  margin-bottom: 5px; /* Espacio entre el icono y el texto */
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Roboto, sans-serif;
+  font-weight: bolder;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #E3600F;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #FF7043;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
   .saldo-actual {
   padding: 20px;
   background-color: #ffffff; 
@@ -380,14 +451,24 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
 }
 
 .btn-primary {
-  background-color: #0056b3; 
-  border: none; 
-  padding: 10px 20px; 
-  border-radius: 4px; 
+  background-color: #E3600F;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
   color: white;
-  font-weight: bold; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions */
 }
+
+.btn-primary:hover {
+  background-color: #FF7043; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); 
+  transform: translateY(-3px); 
+}
+
+
+
 
 #userGreeting {
   font-size: 5vw; 
@@ -422,6 +503,5 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
 .fade-in {
   animation: slideInRight 1.5s ease-out forwards;
 }
-
 
 </style>
