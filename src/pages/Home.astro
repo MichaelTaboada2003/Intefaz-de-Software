@@ -19,14 +19,11 @@ import ImageSlider from '../components/Slider.jsx';
     // Obtén el elemento <span> que cierra el modal
     var span = document.getElementsByClassName("close")[0];
     
-    // Cuando el usuario clickea en <span> (x), cierra el modal
     span.onclick = function() { 
       modal.style.display = "none";
     }
 </script>
     
-
-
 <body>
     <main>
       <div class="content">
@@ -47,12 +44,9 @@ import ImageSlider from '../components/Slider.jsx';
             <img class="modal-content" id="img01">
             <div id="caption"></div>
         </div>
-        
-    </div>
-    
+    </div> 
     </main>
 </body>
-  
 <style>
 body {
     background: url('https://i.postimg.cc/wTL6nVBX/5d06d218-8e82-4198-8f4e-1ce50d9b941b.jpg') no-repeat;
@@ -65,8 +59,6 @@ main {
     display: flex;
     align-items: center;
 }
-
-
 
 .content, .additional-content {
     flex: 1;
@@ -182,7 +174,6 @@ h2{
     text-decoration: none;
     cursor: pointer;
 }
-
 
 </style>
 
