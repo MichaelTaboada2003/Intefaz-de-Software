@@ -33,45 +33,33 @@
         </form>
       </div>
     </nav>
-    <div class="container">
       <ul class="nav nav-pills nav-fill text-light fw-medium">
-        <li class="nav-item">
-          <a class="nav-link text-light" aria-current="page" href="#">Transcaribe</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" aria-current="page" href="#">Transparencia</a>
-        </li>
-        <li class="nav-item p-active">
-          <a class="nav-link text-light" href="#">Crea tu PQRSD</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#">Galeria</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#">Noticias</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#">Avisos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#">Consultar Saldo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#">Portal del Usuario</a>
-        </li>
+        <li class="nav-item"><a class="nav-link text-light" href="#">Transcaribe</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#">Transparencia</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#">Crea tu PQRSD</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#">Galeria</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#">Noticias</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#">Avisos</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#">Consultar Saldo</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#">Portal del Usuario</a></li>
       </ul>
-    </div>
   </header>
 
-
   <style>
-    .nav-link {
-      transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para color y fondo */
+  .nav-link {
+      transition: background-color 0.3s, color 0.3s;
     }
   
     .nav-link:hover, .nav-link:focus {
-      background-color: #FFA726; /* Un tono más claro de naranja */
-      color: #ffffff; /* Texto blanco para alto contraste */
+      background-color: #FFA726; 
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .nav-link {
+      font-size: 12px !important;
+    }
+
     }
   </style>
   
