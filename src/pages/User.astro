@@ -18,7 +18,7 @@ import PSE from "../Icons/PSE.astro";
   
   const formulario = document.getElementById("Formulario1");
   formulario?.addEventListener("submit", function (event) {
-    event.preventDefault(); // Esto evita que el formulario se envíe de forma predeterminada
+    event.preventDefault();
     const send1Input = document.getElementById(
       "bankAmount"
     ) as HTMLInputElement | null;
@@ -264,19 +264,8 @@ import PSE from "../Icons/PSE.astro";
               </div>
 
               <div class="py-3">
-                <label for="bankAmount" class="form-label"
-                  >Monto a Recargar</label
-                >
-                <input
-                  type="number"
-                  class="form-control"
-                  name="amount"
-                  id="bankAmount"
-                  placeholder="Ingresa el monto"
-                  min="0"
-                  step="1000"
-                  required
-                />
+                <label for="bankAmount" class="form-label">Monto a Recargar</label>
+                <input type="number" class="form-control" id="bankAmount" name="amount" placeholder="Ingresa el monto" min="0" required>
                 <div class="valid-feedback">¡Se ve bien!</div>
                 <div class="invalid-feedback">Por favor, llena este campo.</div>
               </div>
@@ -401,7 +390,7 @@ import PSE from "../Icons/PSE.astro";
       <div class="d-flex align-items-center justify-content-start saldo-actual">
         <span class="fw-bold" style="font-size: 2.8vw;">SALDO ACTUAL:</span>
         <div class="saldo">
-          <span class="monto" style="font-size: 4vw;">$10.000</span>
+          <span class="monto" style="font-size: 4vw;">10000</span>
           <span class="moneda">COP</span>
         </div>
       </div>
