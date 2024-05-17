@@ -7,139 +7,171 @@ import PSE from "../Icons/PSE.astro";
 ---
 
 <script>
+  import { number, string } from "astro/zod";
 
-declare global {
-  interface HTMLInputElement {
-    lastValue?: string;
+  declare global {
+    interface HTMLInputElement {
+      lastValue?: string;
+    }
   }
-}
 
-const botones: (HTMLElement | null)[] = [
-  document.getElementById("button1"),
-  document.getElementById("button2"),
-  document.getElementById("button3"),
-];
+  //funcion para sumar el valor recargado al actual
+  const formulario = document.getElementById("Formulario1");
+  formulario?.addEventListener("submit", function (event) {
+    event.preventDefault(); // Esto evita que el formulario se envíe de forma predeterminada
+    const send1Input = document.getElementById(
+      "bankAmount"
+    ) as HTMLInputElement | null;
+    const montoSpan = document.querySelector(
+      ".monto"
+    ) as HTMLSpanElement | null;
+    if (send1Input && montoSpan) {
+      const currentValue = parseInt(montoSpan.textContent || "0");
+      const sendValue = parseInt(send1Input.value || "0");
+      const newValue = currentValue + sendValue;
+      montoSpan.textContent = newValue.toString();
+    }
+    return false;
+  });
 
-function activarBoton(this: HTMLElement): void {
-  console.log("Botón activado");
+  const botones: (HTMLElement | null)[] = [
+    document.getElementById("button1"),
+    document.getElementById("button2"),
+    document.getElementById("button3"),
+  ];
+
+  function activarBoton(this: HTMLElement): void {
+    console.log("Botón activado");
+    botones.forEach((boton: HTMLElement | null) => {
+      boton?.classList.remove("active");
+    });
+    this.classList.add("active");
+  }
+
   botones.forEach((boton: HTMLElement | null) => {
-    boton?.classList.remove("active");
-  });
-  this.classList.add("active");
-}
-
-botones.forEach((boton: HTMLElement | null) => {
-  boton?.addEventListener("click", activarBoton);
-});
-
-function changeState(newState: number): void {
-  const collapseElements: NodeListOf<HTMLElement> = document.querySelectorAll(".paymethod");
-
-  collapseElements.forEach((collapse: HTMLElement) => {
-    collapse.classList.add("collapse");
+    boton?.addEventListener("click", activarBoton);
   });
 
-  switch (newState) {
-    case 1:
-      document.getElementById("collapseOne")?.classList.remove("collapse");
-      break;
-    case 2:
-      document.getElementById("collapseTwo")?.classList.remove("collapse");
-      break;
-    case 3:
-      document.getElementById("collapseThree")?.classList.remove("collapse");
-      break;
-  }
-}
+  function changeState(newState: number): void {
+    const collapseElements: NodeListOf<HTMLElement> =
+      document.querySelectorAll(".paymethod");
 
-document.getElementById("button1")?.addEventListener("click", () => changeState(1));
-document.getElementById("button2")?.addEventListener("click", () => changeState(2));
-document.getElementById("button3")?.addEventListener("click", () => changeState(3));
+    collapseElements.forEach((collapse: HTMLElement) => {
+      collapse.classList.add("collapse");
+    });
 
-(() => {
-  "use strict";
-
-  const forms: NodeListOf<HTMLFormElement> = document.querySelectorAll(".needs-validation");
-
-  Array.from(forms).forEach((form: HTMLFormElement) => {
-    form.addEventListener(
-      "submit",
-      (event: Event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        form.classList.add("was-validated");
-      },
-      false
-    );
-  });
-})();
-
-const cardNum: HTMLInputElement | null = document.getElementById("cr_no") as HTMLInputElement;
-if (cardNum) {
-  cardNum.onkeyup = handleCardNumKeyUp.bind(cardNum);
-}
-
-function handleCardNumKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
-  if (this.value === this.lastValue) return;
-  let caretPosition = this.selectionStart ?? 0;
-  const sanitizedValue = this.value.replace(/[^0-9]/gi, "");
-  const parts: string[] = [];
-
-  for (let i = 0, len = sanitizedValue.length; i < len; i += 4) {
-    parts.push(sanitizedValue.substring(i, i + 4));
-  }
-
-  for (let i = caretPosition - 1; i >= 0; i--) {
-    const c = this.value[i];
-    if (c < "0" || c > "9") {
-      caretPosition--;
+    switch (newState) {
+      case 1:
+        document.getElementById("collapseOne")?.classList.remove("collapse");
+        break;
+      case 2:
+        document.getElementById("collapseTwo")?.classList.remove("collapse");
+        break;
+      case 3:
+        document.getElementById("collapseThree")?.classList.remove("collapse");
+        break;
     }
   }
-  caretPosition += Math.floor(caretPosition / 4);
 
-  this.value = this.lastValue = parts.join("-");
-  this.selectionStart = this.selectionEnd = caretPosition;
-}
+  document
+    .getElementById("button1")
+    ?.addEventListener("click", () => changeState(1));
+  document
+    .getElementById("button2")
+    ?.addEventListener("click", () => changeState(2));
+  document
+    .getElementById("button3")
+    ?.addEventListener("click", () => changeState(3));
 
-const expDate: HTMLInputElement | null = document.getElementById("exp") as HTMLInputElement;
-if (expDate) {
-  expDate.onkeyup = handleExpDateKeyUp.bind(expDate);
-}
+  (() => {
+    "use strict";
 
-function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
-  if (this.value === this.lastValue) return;
-  let caretPosition = this.selectionStart ?? 0;
-  const sanitizedValue = this.value.replace(/[^0-9]/gi, "");
-  const parts: string[] = [];
+    const forms: NodeListOf<HTMLFormElement> =
+      document.querySelectorAll(".needs-validation");
 
-  for (let i = 0, len = sanitizedValue.length; i < len; i += 2) {
-    parts.push(sanitizedValue.substring(i, i + 2));
+    Array.from(forms).forEach((form: HTMLFormElement) => {
+      form.addEventListener(
+        "submit",
+        (event: Event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+
+  const cardNum: HTMLInputElement | null = document.getElementById(
+    "cr_no"
+  ) as HTMLInputElement;
+  if (cardNum) {
+    cardNum.onkeyup = handleCardNumKeyUp.bind(cardNum);
   }
 
-  for (let i = caretPosition - 1; i >= 0; i--) {
-    const c = this.value[i];
-    if (c < "0" || c > "9") {
-      caretPosition--;
+  function handleCardNumKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
+    if (this.value === this.lastValue) return;
+    let caretPosition = this.selectionStart ?? 0;
+    const sanitizedValue = this.value.replace(/[^0-9]/gi, "");
+    const parts: string[] = [];
+
+    for (let i = 0, len = sanitizedValue.length; i < len; i += 4) {
+      parts.push(sanitizedValue.substring(i, i + 4));
     }
+
+    for (let i = caretPosition - 1; i >= 0; i--) {
+      const c = this.value[i];
+      if (c < "0" || c > "9") {
+        caretPosition--;
+      }
+    }
+    caretPosition += Math.floor(caretPosition / 4);
+
+    this.value = this.lastValue = parts.join("-");
+    this.selectionStart = this.selectionEnd = caretPosition;
   }
-  caretPosition += Math.floor(caretPosition / 2);
 
-  this.value = this.lastValue = parts.join("/");
-  this.selectionStart = this.selectionEnd = caretPosition;
-};
+  const expDate: HTMLInputElement | null = document.getElementById(
+    "exp"
+  ) as HTMLInputElement;
+  if (expDate) {
+    expDate.onkeyup = handleExpDateKeyUp.bind(expDate);
+  }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const storedUsername = localStorage.getItem('username'); 
-    const greetingElement = document.getElementById('userGreeting'); 
+  function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
+    if (this.value === this.lastValue) return;
+    let caretPosition = this.selectionStart ?? 0;
+    const sanitizedValue = this.value.replace(/[^0-9]/gi, "");
+    const parts: string[] = [];
 
-    if (storedUsername && greetingElement) { 
+    for (let i = 0, len = sanitizedValue.length; i < len; i += 2) {
+      parts.push(sanitizedValue.substring(i, i + 2));
+    }
+
+    for (let i = caretPosition - 1; i >= 0; i--) {
+      const c = this.value[i];
+      if (c < "0" || c > "9") {
+        caretPosition--;
+      }
+    }
+    caretPosition += Math.floor(caretPosition / 2);
+
+    this.value = this.lastValue = parts.join("/");
+    this.selectionStart = this.selectionEnd = caretPosition;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const storedUsername = localStorage.getItem("username");
+    const greetingElement = document.getElementById("userGreeting");
+
+    if (storedUsername && greetingElement) {
       greetingElement.textContent = `¡Hola!, ${storedUsername}`;
-      greetingElement.classList.add('fade-in'); 
+      greetingElement.classList.add("fade-in");
     } else {
-      console.error('Greeting element or username not found');
+      console.error("Greeting element or username not found");
     }
   });
 </script>
@@ -151,25 +183,26 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
       <div class="mt-5 me-4 d-flex justify-content-between px-4">
         <button type="button" id="button1" class="btn active method" style="background-color: white; width: 30%;">
           <CreditCard class="icon"/>
-          <div class="icon-title">Crédito</div>
+          <div>Crédito</div>
         </button>
         <button type="button" id="button2" class="btn" style="background-color: white; width: 30%;">
           <PayPal class="icon"/>
-          <div class="icon-title">PayPal</div>
+          <div>PayPal</div>
         </button>
         <button type="button" id="button3" class="btn" style="background-color: white; width: 30%;">
           <PSE class="icon"/>
-          <div class="icon-title">PSE</div>
+          <div>PSE</div>
         </button>
       </div>
 
-      <div class="p-5">
+      <div class="py-5 pe-5">
         <div id="collapseOne" class="paymethod">
           <div>
-            <form class="g-3 needs-validation" novalidate>
-
+            <form id="Formulario1" class="g-3 needs-validation" novalidate>
               <div class="py-3">
-                <label for="validationCustom01" class="form-label pay">Nombre en la Tarjeta</label>
+                <label for="validationCustom01" class="form-label pay"
+                  >Nombre en la Tarjeta</label
+                >
                 <input
                   type="text"
                   class="form-control"
@@ -199,46 +232,46 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
               </div>
 
               <div class="py-3">
-                  <label for="validationCustom03" class="form-label">CVV</label>
-                  <input
-                    type="password"
-                    name="cvcpwd"
-                    placeholder="●●●"
-                    class="form-control placeicon"
-                    minlength="3"
-                    maxlength="3"
-                    id="validationCustom03"
-                    required
-                  />
-                  <div class="valid-feedback">¡Se ve bien!</div>
-                  <div class="invalid-feedback">Llena el campo</div>
+                <label for="validationCustom03" class="form-label">CVV</label>
+                <input
+                  type="password"
+                  name="cvcpwd"
+                  placeholder="●●●"
+                  class="form-control placeicon"
+                  minlength="3"
+                  maxlength="3"
+                  id="validationCustom03"
+                  required
+                />
+                <div class="valid-feedback">¡Se ve bien!</div>
+                <div class="invalid-feedback">Llena el campo</div>
               </div>
-               
-                <div class="py-3">
-                  <label for="exp" class="form-label">Fecha de Expiración</label>
-                  <input
-                    type="text"
-                    name="exp"
-                    class="form-control"
-                    id="exp"
-                    placeholder="MM/AA"
-                    minlength="5"
-                    maxlength="5"
-                    required
-                  />
-                  <div class="valid-feedback">¡Se ve bien!</div>
-                  <div class="invalid-feedback">Llena el campo</div>
-                </div>
-
-              
 
               <div class="py-3">
-                <label for="amount" class="form-label">Monto a Recargar</label>
+                <label for="exp" class="form-label">Fecha de Expiración</label>
+                <input
+                  type="text"
+                  name="exp"
+                  class="form-control"
+                  id="exp"
+                  placeholder="MM/AA"
+                  minlength="5"
+                  maxlength="5"
+                  required
+                />
+                <div class="valid-feedback">¡Se ve bien!</div>
+                <div class="invalid-feedback">Llena el campo</div>
+              </div>
+
+              <div class="py-3">
+                <label for="bankAmount" class="form-label"
+                  >Monto a Recargar</label
+                >
                 <input
                   type="number"
                   class="form-control"
                   name="amount"
-                  id="amount"
+                  id="bankAmount"
                   placeholder="Ingresa el monto"
                   min="0"
                   step="1000"
@@ -249,17 +282,21 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
               </div>
 
               <div class="py-3">
-                <button class="btn btn-primary" type="submit">Pagar con Tarjeta</button>
-              </div>        
+                <button class="btn btn-primary" type="submit"
+                  >Pagar con Tarjeta</button
+                >
+              </div>
             </form>
           </div>
         </div>
-        
+
         <div id="collapseTwo" class="paymethod collapse">
           <div>
             <form class="g-3 needs-validation" novalidate>
               <div class="py-3">
-                <label for="paypalEmail" class="form-label">Correo electrónico</label>
+                <label for="paypalEmail" class="form-label"
+                  >Correo electrónico</label
+                >
                 <input
                   type="email"
                   class="form-control"
@@ -269,11 +306,15 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
                   required
                 />
                 <div class="valid-feedback">¡Se ve bien!</div>
-                <div class="invalid-feedback">Por favor, introduce un correo electrónico válido.</div>
+                <div class="invalid-feedback">
+                  Por favor, introduce un correo electrónico válido.
+                </div>
               </div>
-        
+
               <div class="py-3">
-                <label for="paypalAmount" class="form-label">Monto a Recargar</label>
+                <label for="paypalAmount" class="form-label"
+                  >Monto a Recargar</label
+                >
                 <input
                   type="number"
                   class="form-control"
@@ -285,23 +326,33 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
                   required
                 />
                 <div class="valid-feedback">¡Se ve bien!</div>
-                <div class="invalid-feedback">Por favor, introduce un monto válido.</div>
+                <div class="invalid-feedback">
+                  Por favor, introduce un monto válido.
+                </div>
               </div>
-     
+
               <div class="py-3">
-                <button class="btn btn-primary" type="submit">Pagar con PayPal</button>
+                <button class="btn btn-primary" type="submit"
+                  >Pagar con PayPal</button
+                >
               </div>
             </form>
           </div>
         </div>
-        
 
         <div id="collapseThree" class="paymethod collapse">
           <div>
             <form class="g-3 needs-validation" novalidate>
               <div class="py-3">
-                <label for="bankSelection" class="form-label">Selecciona tu Banco</label>
-                <select class="form-control" id="bankSelection" name="bankSelection" required>
+                <label for="bankSelection" class="form-label"
+                  >Selecciona tu Banco</label
+                >
+                <select
+                  class="form-control"
+                  id="bankSelection"
+                  name="bankSelection"
+                  required
+                >
                   <option value="">Elige un Banco</option>
                   <option value="banco1">Lulo Bank</option>
                   <option value="banco2">Nu Bank</option>
@@ -310,11 +361,15 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
                   <option value="banco4">Bancolombia</option>
                 </select>
                 <div class="valid-feedback">¡Todo correcto!</div>
-                <div class="invalid-feedback">Por favor, selecciona un banco.</div>
+                <div class="invalid-feedback">
+                  Por favor, selecciona un banco.
+                </div>
               </div>
-        
+
               <div class="py-3">
-                <label for="pseAmount" class="form-label">Monto a Recargar</label>
+                <label for="pseAmount" class="form-label"
+                  >Monto a Recargar</label
+                >
                 <input
                   type="number"
                   class="form-control"
@@ -326,29 +381,34 @@ function handleExpDateKeyUp(this: HTMLInputElement, e: KeyboardEvent) {
                   required
                 />
                 <div class="valid-feedback">¡Todo correcto!</div>
-                <div class="invalid-feedback">Por favor, introduce un monto válido.</div>
+                <div class="invalid-feedback">
+                  Por favor, introduce un monto válido.
+                </div>
               </div>
-        
+
               <div class="py-3">
-                <button class="btn btn-primary" type="submit">Pagar con PSE</button>
+                <button class="btn btn-primary" type="submit"
+                  >Pagar con PSE</button
+                >
               </div>
             </form>
           </div>
         </div>
-        
       </div>
     </div>
-    
+
     <div class="flex-fill pe-5 pt-3">
       <div class="d-flex align-items-center justify-content-start saldo-actual">
         <span class="fw-bold" style="font-size: 2.8vw;">SALDO ACTUAL:</span>
         <div class="saldo">
-          <span class="monto" style="font-size: 4vw;">$10.000</span>
+          <span class="monto" style="font-size: 4vw;">$10.000,00</span>
           <span class="moneda">COP</span>
         </div>
       </div>
-       
-      <span class="fw-bold movimientos-title" style="font-size: 2vw;">Últimos Movimientos</span>
+
+      <span class="fw-bold movimientos-title" style="font-size: 2vw;"
+        >Últimos Movimientos</span
+      >
       <div class="mt-2" style="overflow-y: auto; max-height: 70vh;">
         <Movement type="Recarga" amount="20.000" date="23/01/2024 : 08:50 AM" />
         <Movement type="Viaje" amount="3.000" date="23/01/2024 : 09:50 AM" />
@@ -386,91 +446,96 @@ body, html {
     border: solid 2px #f07000;
   }
 
-.icon {
-  width: 50px;  /* Ajusta el tamaño según sea necesario */
-  height: 50px; /* Ajusta el tamaño según sea necesario */
-  margin-bottom: 5px; /* Espacio entre el icono y el texto */
-}
+  .icon {
+    width: 50px; /* Ajusta el tamaño según sea necesario */
+    height: 50px; /* Ajusta el tamaño según sea necesario */
+    margin-bottom: 5px; /* Espacio entre el icono y el texto */
+  }
 
-.btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: Roboto, sans-serif;
-  font-weight: bolder;
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-}
+  .btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Roboto, sans-serif;
+    font-weight: bolder;
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
+    cursor: pointer;
+  }
 
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 
-.btn-primary {
-  background-color: #E3600F;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-weight: bold;
-}
+  .btn-primary {
+    background-color: #e3600f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
 
-.btn-primary:hover {
-  background-color: #FF7043;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
+  .btn-primary:hover {
+    background-color: #ff7043;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
 
   .saldo-actual {
-  padding: 20px;
-  background-color: #ffffff; 
-  border-radius: 8px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  margin-top: 20px; 
-}
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
 
-.saldo {
-  display: flex;
-  align-items: baseline; 
-  margin-left: 10px; 
-}
+  .saldo {
+    display: flex;
+    align-items: baseline;
+    margin-left: 10px;
+  }
 
-.monto {
-  font-weight: bold;
-  color: #0d1a0e; 
-  margin-right: 5px; 
-}
+  .monto {
+    font-weight: bold;
+    color: #0d1a0e;
+    margin-right: 5px;
+  }
 
-.moneda {
-  font-size: 2vw;
-  color: #666666; 
-}
+  .moneda {
+    font-size: 2vw;
+    color: #666666;
+  }
 
-.paymethod {
-  padding: 10px; 
-  background-color: #fff; 
-  border-radius: 8px; 
-  border: 1px solid #ccc; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-}
+  .paymethod {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
-.form-control {
-  border-radius: 4px; 
-  border: 1px solid #ccc; 
-  padding: 6px 10px; 
-}
+  .form-control {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+  }
 
-.btn-primary {
-  background-color: #E3600F;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  color: white;
-  font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-}
+  .btn-primary {
+    background-color: #e3600f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s ease; /* Smooth transitions */
+  }
 
 .btn-primary:hover {
   background-color: #FF7043; 
@@ -479,80 +544,40 @@ body, html {
 }
 
 
-#userGreeting {
-  font-size: 5vw; 
-  color: #050708;
-  text-shadow: 1px 1px 2px #bdc3c7; 
-  margin-top: 20px; 
-  padding: 10px 20px; 
-  background-color: #ffffff;
-  border-radius: 5px; 
-  display: inline-block; 
-  text-align: center; 
-}
 
-.movimientos-title {
-  display: block; 
-  margin-top: 20px; 
-  margin-bottom: 20px; 
-  font-weight: bold; 
-}
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(-50px); 
+  #userGreeting {
+    font-size: 5vw;
+    color: #050708;
+    text-shadow: 1px 1px 2px #bdc3c7;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+
+  .movimientos-title {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
   }
-}
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 
 .fade-in {
   animation: slideInRight 1.5s ease-out forwards;
-}
-
-@media (max-width: 768px) {
-  #userGreeting {
-    font-size: 20px !important;
-    margin: 0px !important;
-  }
-  .flex-fill{
-    max-width: 160px;
-    padding-inline-end: 0px !important;
-    padding-top: 0px !important;
-  }
-  .monto{
-    font-size: 12px !important;
-  }
-  .moneda{
-    font-size: 10px !important;
-  }
-  .fw-bold{
-    font-size: 10px !important;
-  }
-  .movimientos-title{
-    font-size: 15px !important;
-  }
-  .icon-title{
-    font-size: 12px !important;
-  }
-  .p-5{
-    padding: 5px !important;
-    
-  }
-  .mt-5{
-    margin-top: 10px !important;
-  }
-  .mt-2{
-    max-height: 50vh !important;
-  }
-  .py-3{
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
-  }
-  
 }
 
 </style>
