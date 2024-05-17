@@ -39,7 +39,7 @@ if (span) {
         <a href="./Account" class="cta-button">Clíc para ingresar</a>
       </div>
       <div class="additional-content">
-        <h1><span style="font-size: 40px; text-align: center">Conoce nuestras rutas</span></h1>
+        <h1><span style="font-size: 40px; text-align: center">¡Conoce nuestras rutas!</span></h1>
         <ImageSlider client:load />
         <div class="general-map-container">
             <h2 style="font-weight: 700; margin-top: 10px; font-size: 36px">Mapa general</h2>
@@ -121,8 +121,6 @@ h2{
     color: #E3600F;
 }
 
-
-
 .general-map-container { 
     display: flex;
     flex-direction: column;
@@ -154,27 +152,30 @@ h2{
     cursor: pointer; 
 }
 
-
 .modal {
-    display: none; /* Oculto por defecto */
-    position: fixed; /* Queda fijo en la pantalla */
-    z-index: 1; /* Situado encima de todo */
-    padding-top: 300px; /* Ubicación desde la parte superior */
+    display: none; 
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Ancho completo */
-    height: 100%; /* Alto completo */
-    overflow: auto; /* Habilitar scroll si es necesario */
-    background-color: rgb(0,0,0); /* Fondo negro */
-    background-color: rgba(0,0,0,0.9); /* Negro con opacidad */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9); /* Fondo oscuro con opacidad */
+    display: flex; /* Habilita flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    padding-top: 50px;
 }
 
 .modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px; 
+    max-width: 700px; /* Ancho máximo del contenido */
+    max-height: 90%; /* Altura máxima para evitar desbordamiento */
+    margin: auto; /* Ayuda adicional para centrar */
+    display: block; /* Bloque para elementos de imagen */
 }
+
+
 
 .close {
     position: absolute;
@@ -195,8 +196,6 @@ h2{
 
 @media (max-width: 768px) {
 
-
-    
     .content span{ 
         font-size: 34px !important;
     }
@@ -213,15 +212,19 @@ h2{
         padding: 8px 16px !important;
         
     }
-    .modal-content {
-        max-width: 550px !important;
-        height: auto !important;
-    }
     .additional-content h1, .additional-content h1 span {
         font-size: 20px !important;
     }
     .general-map-container h2{
         font-size: 18px !important;
+    }
+
+    .modal{
+        padding-top: 200px;
+    }
+
+    .modal-content{
+        max-width: 350px;
     }
  
 }

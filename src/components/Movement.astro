@@ -8,15 +8,13 @@ interface Props {
 const { type, amount, date } = Astro.props;
 ---
 
-<div class:list={["movement-item d-flex align-items-center justify-content-between p-3", type]}>
+<div class:list={["movement-item d-flex justify-content-between p-3", type]}>
   <div>
     <h4 class:list={["fw-bold m-0"]}>{type}</h4>
     <span class="text-muted">{date}</span>
   </div>
-  <h2 class="m-0 text-end">$ {amount}</h2>
+  <h2 class="m-0 text-end">${amount}</h2>
 </div>
-
-
 
 
 <style>
@@ -54,4 +52,25 @@ h2 {
   font-size: 1.5rem;
 }
 
+@media (max-width: 768px) {
+
+  h4 {
+    font-size: 1rem; 
+  }
+
+  h2 {
+    font-size: 1rem; 
+  }
+
+  .text-muted {
+    font-size: 0.8rem; 
+  }
+  .p-3{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+}
+
+
 </style>
+
