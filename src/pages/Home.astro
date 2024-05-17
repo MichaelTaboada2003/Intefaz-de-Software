@@ -4,7 +4,6 @@ import ImageSlider from '../components/Slider.jsx';
 
 <script>
 
-
 const modal = document.getElementById("mapModal") as HTMLElement | null;
 const img = document.querySelector('.general-map') as HTMLImageElement | null;
 const modalImg = document.getElementById("img01") as HTMLImageElement | null;
@@ -39,7 +38,7 @@ if (span) {
         <a href="./Account" class="cta-button">Clíc para ingresar</a>
       </div>
       <div class="additional-content">
-        <h1><span style="font-size: 40px; text-align: center">¡Conoce nuestras rutas!</span></h1>
+        <h1><span style="font-size: 40px; text-align: center">Conoce nuestras rutas</span></h1>
         <ImageSlider client:load />
         <div class="general-map-container">
             <h2 style="font-weight: 700; margin-top: 10px; font-size: 36px">Mapa general</h2>
@@ -161,10 +160,7 @@ h2{
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.9); /* Fondo oscuro con opacidad */
-    display: flex; /* Habilita flexbox */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+    background-color: rgba(0,0,0,0.9); 
     padding-top: 50px;
 }
 
@@ -174,8 +170,6 @@ h2{
     margin: auto; /* Ayuda adicional para centrar */
     display: block; /* Bloque para elementos de imagen */
 }
-
-
 
 .close {
     position: absolute;

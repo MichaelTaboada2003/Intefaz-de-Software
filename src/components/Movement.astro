@@ -8,50 +8,86 @@ interface Props {
 const { type, amount, date } = Astro.props;
 ---
 
-<div class:list={["movement-item d-flex align-items-center justify-content-between p-3", type]}>
+<div class:list={["movement-item d-flex justify-content-between p-3", type]}>
   <div>
     <h4 class:list={["fw-bold m-0"]}>{type}</h4>
     <span class="text-muted">{date}</span>
   </div>
-  <h2 class="m-0 text-end">$ {amount}</h2>
+  {
+    type == "Viaje" && (
+      <img src="src/bus.png" alt="Viaje" height="100" width="100" class="type-icon"/>
+    )}{
+    type == "Recarga" && (
+      <img src="src/recarga.png" alt="Recarga" height="80" width="80" class="type-icon"/>
+    )
+  }
+
+  <h2 class="m-0 text-end">${amount}</h2>
 </div>
 
-
-
-
 <style>
-  .movement-item {
-    border-bottom: 2px solid #ddd;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-  }
+.movement-item {
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
 
-  .movement-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  }
+.movement-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
 
-  .Recarga {
-    background-color: #f0fff0;
-    border-left: 5px solid #4caf50;
-  }
+.Recarga {
+  background-color: #f0fff0; 
+  border-left: 5px solid #4CAF50;
+}
 
-  .Viaje {
-    background-color: #fff0f0;
-    border-left: 5px solid #f44336;
-  }
+.Viaje {
+  background-color: #fff0f0; 
+  border-left: 5px solid #F44336; 
+}
 
-  .text-muted {
-    color: #6c757d;
-  }
+.text-muted {
+  color: #6c757d;
+}
 
-  h4 {
-    font-size: 1.2rem;
-  }
+h4 {
+  font-size: 1.2rem;
+}
 
 h2 {
   font-size: 1.5rem;
+}
+
+.type-icon {
+  width: 100%; /* Usa el 100% del ancho del contenedor */
+  max-width: 100px; /* Máximo ancho original de la imagen */
+  height: auto; /* Altura auto para mantener la proporción */
+  display: block; /* Para evitar problemas de espacio extra alrededor de las imágenes */
+}
+
+@media (max-width: 768px) {
+
+  h4 {
+    font-size: 1rem; 
+  }
+
+  h2 {
+    font-size: 1rem; 
+  }
+
+  .text-muted {
+    font-size: 0.8rem; 
+  }
+  .p-3{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+.type-icon {
+      display: none; 
+}
+
 }
 
 </style>
